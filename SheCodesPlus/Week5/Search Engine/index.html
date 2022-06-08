@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Search Engine</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <form id="city-slicker">
+      <input type="text" id="city-input" placeholder="Search city" />
+      <input type="submit" value="Search" />
+      <input type="button" id="my-current" value="Current"/>
+    </form>
+    <h1 id="city">City</h1>
+    <h2></h2>
+    <div>
+      <span id="temp">19</span>
+      <span>
+        <a href="#" id="c-link">°C</a> / <a href="#" id="f-link"> °F</a></span
+      >
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

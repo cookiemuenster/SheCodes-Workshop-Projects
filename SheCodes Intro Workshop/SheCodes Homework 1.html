@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      h1 {
+        text-align: center;
+        font-size: 25px;
+        margin-bottom: 5px;
+      }
+      h2 {
+        text-align: center;
+        margin-top: 5px;
+        margin-bottom: 3px;
+        padding-bottom: 1px;
+        border-bottom: 5px;
+      }
+      ul {
+        text-align: center;
+        padding: 0;
+      }
+      li {
+        list-style: none;
+        border-radius: 5px;
+        padding: 15px 0;
+        margin: 0 auto;
+        transition: all 1s ease-out;
+        transition-delay: 0.1s;
+      }
+      li:hover {
+        background: wheat;
+      }
+      button {
+        display: block;
+        margin: 0 auto;
+        font-size: 12px;
+        padding: 10px 11px;
+        border-radius: 50px;
+        box-shadow: 12px 12px 2px 1px #132c5e;
+        border: 1px;
+        background: #1a53c4;
+        transition: all 0.3s ease-in-out;
+      }
+      button:hover {
+        background: rgb(160, 3, 3);
+        cursor: pointer;
+        box-shadow: 4px 3px #132c5e;
+      }
+      footer {
+        text-align: center;
+        margin: 20px;
+        font-size: 12px;
+      }
+      .thin {
+        font-weight: 100;
+      }
+      .only-color {
+        color: #1a53c4;
+      }
+      .change-city {
+        color: whitesmoke;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      ☔
+      <div class="only-color">Currently 21º in Tokyo</div>
+    </h1>
+    <h2><span class="thin">13º / </span><strong>23º</strong></h2>
+    <ul>
+      <li>
+        ⛅ Tomorrow
+        <div>10º / <strong>22º</strong></div>
+      </li>
+      <li>
+        🌦 Saturday
+        <div>15º / <strong>17º</strong></div>
+      </li>
+      <li>
+        🌤 Sunday
+        <div>25º / <strong>28º</strong></div>
+      </li>
+    </ul>
+    <button class="change-city">Change City</button>
+    <footer>Coded by Leo Patrice Ware</footer>
+  </body>
+</html>
