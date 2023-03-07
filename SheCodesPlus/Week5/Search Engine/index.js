@@ -1,84 +1,89 @@
 function city(event) {
-    event.preventDefault();
-    let cityInput = document.querySelector("#city-input");
-    let h1 = document.querySelector("h1");
-    h1.innerHTML = `${cityInput.value}`;
-  }
-  let citySlicker = document.querySelector("#city-slicker");
-  citySlicker.addEventListener("submit", city);
+  event.preventDefault();
+  let cityInput = document.querySelector("#city-input");
+  let h1 = document.querySelector("h1");
+  h1.innerHTML = `${cityInput.value}`;
+}
+let citySlicker = document.querySelector("#city-slicker");
+citySlicker.addEventListener("submit", city);
 
-  //2
-  function formatDate() {
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ];
-    let now = new Date();
-    let hour = now.getHours();
-    let minutes = now.getMinutes();
-  
-    let day = days[now.getDay()];
-    let display = document.querySelector("h2");
-    display.innerHTML = `${day} ${hour}:${minutes}`;
+//2
+function formatDate() {
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let now = new Date();
+  let hour = now.getHours();
+  let minutes = now.getMinutes();
+  if (hour < 10) {
+    hour = `0${hour}`;
   }
-  formatDate();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
 
-  //get searched city weather info
-  function displayWeather(response) {
-    console.log(response.data.name);
-    document.querySelector('#city').innerHTML = response.data.name;
-    document.querySelector('#temp').innerHTML = response.data.main.temp;
-    document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-    document.querySelector("#wind").innerHTML = 
-    response.data.wind.speed;
-    document.querySelector("#description").innerHTML =
+  let day = days[now.getDay()];
+  let display = document.querySelector("h2");
+  display.innerHTML = `${day} ${hour}:${minutes}`;
+}
+formatDate();
+
+//get searched city weather info
+function displayWeather(response) {
+  console.log(response.data.name);
+  document.querySelector("#city").innerHTML = response.data.name;
+  document.querySelector("#temp").innerHTML = response.data.main.temp;
+  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+  document.querySelector("#wind").innerHTML = response.data.wind.speed;
+  document.querySelector("#description").innerHTML =
     response.data.weather[0].main;
-  }
-  
-  function search(event) {
-    event.preventDefault();
-    //let city = document.querySelector('#city-input');
-    let apiKey = '3cd9127280fccb0f6f49ef4edbb978bb';
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
-    axios.get(apiUrl).then(displayWeather);
-  }
-  
-  //get current location info
+}
 
-  function searchLocal(position) {
-    let apiKey = "3cd9127280fccb0f6f49ef4edbb978bb";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=imperial`;
-    axios.get(apiUrl).then(displayWeather);
-  }
+function search(event) {
+  event.preventDefault();
+  //let city = document.querySelector('#city-input');
+  let apiKey = "3cd9127280fccb0f6f49ef4edbb978bb";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+  axios.get(apiUrl).then(displayWeather);
+}
 
-  function getCurrentLocation(event) {
-    event.preventDefault();
-    navigator.geolocation.getCurrentPosition(searchLocal);
-  }
+//get current location info
 
-  let currentLocationButton = document.querySelector("#my-current");
-  currentLocationButton.addEventListener("click", getCurrentLocation);
+function searchLocal(position) {
+  let apiKey = "3cd9127280fccb0f6f49ef4edbb978bb";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=imperial`;
+  axios.get(apiUrl).then(displayWeather);
+}
 
-  //3
-  function convertF(event) {
-    event.preventDefault();
-    let tempUnit = document.querySelector("#temp");
-    tempUnit.innerHTML = 66;
-  }
-  
-  function convertC(event) {
-    event.preventDefault();
-    let tempUnit = document.querySelector("#temp");
-    tempUnit.innerHTML = 19;
-  }
-  
-  let fLink = document.querySelector("#f-link");
-  fLink.addEventListener("click", convertF);
-  let cLink = document.querySelector("#c-link");
-  cLink.addEventListener("click", convertC);
-  search();
+function getCurrentLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocal);
+}
+
+let currentLocationButton = document.querySelector("#my-current");
+currentLocationButton.addEventListener("click", getCurrentLocation);
+
+//3
+function convertF(event) {
+  event.preventDefault();
+  let tempUnit = document.querySelector("#temp");
+  tempUnit.innerHTML = 66;
+}
+
+function convertC(event) {
+  event.preventDefault();
+  let tempUnit = document.querySelector("#temp");
+  tempUnit.innerHTML = 19;
+}
+
+let fLink = document.querySelector("#f-link");
+fLink.addEventListener("click", convertF);
+let cLink = document.querySelector("#c-link");
+cLink.addEventListener("click", convertC);
+search();
