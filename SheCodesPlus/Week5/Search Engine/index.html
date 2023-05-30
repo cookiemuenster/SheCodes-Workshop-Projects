@@ -9,17 +9,18 @@
 
   <body>
     <form id="city-slicker">
-      <input type="text" id="city-input" placeholder="Search city" />
+      <input type="search" id="city-input" placeholder="Search City" />
       <input type="submit" value="Search" />
-      <input type="button" id="my-current" value="Current"/>
+      <input type="button" id="my-current" value="Current" />
     </form>
     <h1 id="city">City</h1>
-    <h2></h2>
+    <h2 id="date">Date</h2>
     <div>
       <span id="temp">19</span>
       <span>
-        <a href="#" id="c-link">°C</a> / <a href="#" id="f-link"> °F</a></span
-      >
+        <a href="#" id="c-link">°C</a> |
+        <a href="#" id="f-link" class="set-active"> °F</a>
+      </span>
     </div>
     <script src="index.js"></script>
   </body>

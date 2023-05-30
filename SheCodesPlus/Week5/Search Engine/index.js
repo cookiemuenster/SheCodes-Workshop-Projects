@@ -1,13 +1,4 @@
-function city(event) {
-  event.preventDefault();
-  let cityInput = document.querySelector("#city-input");
-  let h1 = document.querySelector("h1");
-  h1.innerHTML = `${cityInput.value}`;
-}
-let citySlicker = document.querySelector("#city-slicker");
-citySlicker.addEventListener("submit", city);
-
-//2
+//formatting the date and time to make it accessible for end users
 function formatDate() {
   let days = [
     "Sunday",
@@ -36,31 +27,53 @@ formatDate();
 
 //get searched city weather info
 function displayWeather(response) {
-  console.log(response.data.name);
-  document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#temp").innerHTML = response.data.main.temp;
-  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-  document.querySelector("#wind").innerHTML = response.data.wind.speed;
-  document.querySelector("#description").innerHTML =
-    response.data.weather[0].main;
+  //console.log(response.data.name); --> Don't need this anymore. Also, not good form to log to the console in the program.
+  let cityElement = document.querySelector("#city");
+  let temperatureElement = document.querySelector("#temp");
+  let humidityElement = document.querySelector("#humidity");
+  let windElement = document.querySelector("#wind");
+  let descriptionElement = document.querySelector("#description");
+  let dateElement = document.querySelector("#date");
+
+  fahrenheitTemp = response.data.main.temp;
+
+  cityElement.innerHTML = response.data.name;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
+  humidityElement.innerHTML = response.data.main.humidity;
+  windElement.innerHTML = response.data.wind.speed;
+  descriptionElement.innerHTML = response.data.weather[0].main;
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
 }
 
-function search(event) {
-  event.preventDefault();
-  //let city = document.querySelector('#city-input');
+//search function to call weather api for city of choice
+function search(city) {
   let apiKey = "3cd9127280fccb0f6f49ef4edbb978bb";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(displayWeather);
 }
 
-//get current location info
+//handling user input for city of choice
+function handleCitySubmit(event) {
+  event.preventDefault();
+  let cityInput = document.querySelector("#city-input");
+  search(cityInput.value);
+}
+let citySlicker = document.querySelector("#city-slicker");
+citySlicker.addEventListener("submit", handleCitySubmit);
 
+//get weather info for current location
 function searchLocal(position) {
   let apiKey = "3cd9127280fccb0f6f49ef4edbb978bb";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(displayWeather);
 }
 
+//get current location by default upon loading app in browser
+function defaultLocation() {
+  navigator.geolocation.getCurrentPosition(searchLocal);
+}
+
+//get current position when "Current" button is clicked
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchLocal);
@@ -69,21 +82,31 @@ function getCurrentLocation(event) {
 let currentLocationButton = document.querySelector("#my-current");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
-//3
-function convertF(event) {
+//setting temperature to fahrenheight by default and allowing user to toggle between fahrenheit and celsius
+function tempInF(event) {
   event.preventDefault();
   let tempUnit = document.querySelector("#temp");
-  tempUnit.innerHTML = 66;
+  fLink.classList.add("set-active");
+  cLink.classList.remove("set-active");
+
+  tempUnit.innerHTML = Math.round(fahrenheitTemp);
 }
 
-function convertC(event) {
+//converting fahrenheight to celsius
+function tempInC(event) {
   event.preventDefault();
   let tempUnit = document.querySelector("#temp");
-  tempUnit.innerHTML = 19;
+  fLink.classList.remove("set-active");
+  cLink.classList.add("set-active");
+  //subtract 32 and multiply by .5556 (or 5/9)
+  let celsiusTemp = ((fahrenheitTemp - 32) * 5) / 9;
+  tempUnit.innerHTML = Math.round(celsiusTemp);
 }
 
 let fLink = document.querySelector("#f-link");
-fLink.addEventListener("click", convertF);
+fLink.addEventListener("click", tempInF);
 let cLink = document.querySelector("#c-link");
-cLink.addEventListener("click", convertC);
+cLink.addEventListener("click", tempInC);
+
+defaultLocation();
 search();
