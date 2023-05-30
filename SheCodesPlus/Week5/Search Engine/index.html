@@ -14,14 +14,30 @@
       <input type="button" id="my-current" value="Current" />
     </form>
     <h1 id="city">City</h1>
-    <h2 id="date">Date</h2>
+    <ul>
+      <li><h2 id="date">Date</h2></li>
+      <li><p id="description">Description</p></li>
+    </ul>
+    <span>
+      <ul>
+        <li>Precipitation: <span id="precipitation"></span>%</li>
+        <li>Humidity: <span id="humidity"></span>%</li>
+        <li>Wind: <span id="wind"></span>%</li>
+      </ul>
+    </span>
+
     <div>
-      <span id="temp">19</span>
-      <span>
-        <a href="#" id="c-link">°C</a> |
-        <a href="#" id="f-link" class="set-active"> °F</a>
-      </span>
+      <span id="temp"></span>
+      <span id="c-link"> °C | </span>
+      <span id="f-link" class="set-active"> °F </span>
     </div>
+    <footer>
+      <a
+        href="https://github.com/cookiemuenster/SheCodes-Workshop-Projects/tree/main/SheCodesPlus/Week5/Search%20Engine"
+        >Open-source code</a
+      >
+      by Leo Patrice J. Ware
+    </footer>
     <script src="index.js"></script>
   </body>
 </html>

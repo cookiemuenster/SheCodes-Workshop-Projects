@@ -20,7 +20,7 @@ function formatDate() {
   }
 
   let day = days[now.getDay()];
-  let display = document.querySelector("h2");
+  let display = document.querySelector("#date");
   display.innerHTML = `${day} ${hour}:${minutes}`;
 }
 formatDate();
@@ -42,7 +42,6 @@ function displayWeather(response) {
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = response.data.wind.speed;
   descriptionElement.innerHTML = response.data.weather[0].main;
-  dateElement.innerHTML = formatDate(response.data.dt * 1000);
 }
 
 //search function to call weather api for city of choice
