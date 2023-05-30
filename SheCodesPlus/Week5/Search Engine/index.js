@@ -1,5 +1,5 @@
 //formatting the date and time to make it accessible for end users
-function formatDate() {
+function formatDate(timestamp) {
   let days = [
     "Sunday",
     "Monday",
@@ -9,7 +9,7 @@ function formatDate() {
     "Friday",
     "Saturday",
   ];
-  let now = new Date();
+  let now = new Date(timestamp);
   let hour = now.getHours();
   let minutes = now.getMinutes();
   if (hour < 10) {
@@ -20,9 +20,11 @@ function formatDate() {
   }
 
   let day = days[now.getDay()];
-  let display = document.querySelector("#date");
-  display.innerHTML = `${day} ${hour}:${minutes}`;
+  return `${day} ${hour}:${minutes}`;
+  // let display = document.querySelector("#date");
+  // display.innerHTML = `${day} ${hour}:${minutes}`;
 }
+
 formatDate();
 
 //get searched city weather info
@@ -34,14 +36,21 @@ function displayWeather(response) {
   let windElement = document.querySelector("#wind");
   let descriptionElement = document.querySelector("#description");
   let dateElement = document.querySelector("#date");
+  let iconElement = document.querySelector("#weatherIcon");
 
   fahrenheitTemp = response.data.main.temp;
 
   cityElement.innerHTML = response.data.name;
   temperatureElement.innerHTML = Math.round(fahrenheitTemp);
   humidityElement.innerHTML = response.data.main.humidity;
-  windElement.innerHTML = response.data.wind.speed;
-  descriptionElement.innerHTML = response.data.weather[0].main;
+  windElement.innerHTML = Math.round(response.data.wind.speed);
+  descriptionElement.innerHTML = response.data.weather[0].description;
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", `${response.data.weather[0].description}`);
 }
 
 //search function to call weather api for city of choice
