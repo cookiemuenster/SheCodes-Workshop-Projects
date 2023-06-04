@@ -31,25 +31,27 @@ formatDate();
 function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
 
-  let forecastHTML = "";
+  let forecastHTML = `<div class= "row">`;
 
   let days = ["Wednesday", "Thursday", "Friday", "Saturday"];
+
   days.forEach(function (day) {
     forecastHTML =
       forecastHTML +
-      `<div>
-          <div class="col-2" class="weather-forecast" id="forecast">
-            <div>${day}</div>
-            <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="" />
+      `
+          <div class="col-2">
+            <div class="weather-forecast-date">${day}</div>
+            <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="" width = "45" />
             <div class="weather-forecast-temperatures">
               <span class="forecast-temperature-max">18</span>
               <span class="forecast-temperature-min">12</span>
             </div>
           </div>
-        </div>`;
+
+        `;
   });
 
-  forecastElement.innerHTML = forecastHTML;
+  forecastElement.innerHTML = forecastHTML + `</div>`;
 }
 
 //get searched city weather info
