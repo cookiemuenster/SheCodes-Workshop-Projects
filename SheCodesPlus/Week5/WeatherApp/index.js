@@ -36,7 +36,6 @@ function formatDay(timestamp) {
 
 //displaying forecast
 function displayForecast(response) {
-  console.log(response.data.list);
   let forecast = response.data.list;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class= "row">`;
@@ -72,7 +71,6 @@ function displayForecast(response) {
 
 //function to get the daily forecast data from the open weather api
 function getDailyForecast(coordinates) {
-  console.log(coordinates);
   let apiKey = "3cd9127280fccb0f6f49ef4edbb978bb";
   let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(displayForecast);
