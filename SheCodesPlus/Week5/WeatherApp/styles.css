@@ -5,7 +5,12 @@ body {
 .weather-app {
   max-width: 600px;
   margin: 0 auto;
-
+  padding-left: 25px;
   border: 1px solid gray;
   border-radius: 10px;
+}
+
+#date,
+#description {
+  list-style: none;
 }
